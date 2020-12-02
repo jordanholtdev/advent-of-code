@@ -1,7 +1,7 @@
 const readFile = require('fs').readFileSync;
 
 // prep the input
-const file = readFile(__dirname + '/1-a.input', 'utf-8')
+const file = readFile(__dirname + '/../1-a.input', 'utf-8')
   .split(/\r?\n/)
   .filter((_) => _.trim())
   .map((_) => {
@@ -12,9 +12,10 @@ const file = readFile(__dirname + '/1-a.input', 'utf-8')
 
 let a = null;
 
-let b = file.find((number) => {
+let b = file.find((number, index) => {
   for (let i = 0; i < file.length; i++) {
     const m = file[i];
+    if (number === index) return false;
     if (number + m === 2020) {
       a = m;
       return true;
@@ -22,4 +23,4 @@ let b = file.find((number) => {
   }
 });
 
-console.log(a, b, a + b === 2020, a * b);
+console.log(a * b);

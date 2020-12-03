@@ -8,19 +8,37 @@ const file = readFile(__dirname + '/../1-a.input', 'utf-8')
     return parseInt(_, 10);
   });
 
-// const length = file.length;
+const res = [];
+let found = false;
 
-let a = null;
+for (let i = 0; i < file.length; i++) {
+  const a = file[i];
 
-let b = file.find((number, index) => {
-  for (let i = 0; i < file.length; i++) {
-    const m = file[i];
-    if (number === index) return false;
-    if (number + m === 2020) {
-      a = m;
-      return true;
+  if (a > 2018) continue;
+
+  const subset1 = file.slice(1);
+  for (let j = 0; j < subset1.length; j++) {
+    const b = subset1[j];
+
+    if (a + b > 2020) continue;
+
+    const subset2 = subset1.slice(1);
+    for (let k = 0; k < subset2.length; k++) {
+      const c = subset2[k];
+
+      if (a + b + c === 2020) {
+        found = true;
+        res.push(a, b, c);
+        break;
+      }
     }
+    if (found) break;
   }
+  if (found) break;
+}
+
+const finalResult = res.reduce((acc, curr) => {
+  return (acc *= curr);
 });
 
-console.log(a * b);
+console.log(finalResult);

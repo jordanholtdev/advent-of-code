@@ -8,8 +8,6 @@ const file = readFile(__dirname + '/../1-a.input', 'utf-8')
     return parseInt(_, 10);
   });
 
-// const length = file.length;
-
 let a = null;
 
 let b = file.find((number, index) => {
